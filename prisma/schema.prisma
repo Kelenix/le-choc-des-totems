@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String   @id @default(uuid())
+  pseudo             String
+  email              String?
+  newsletterOptIn    Boolean  @default(false)
+  points             Int      @default(0)
+  streak             Int      @default(0)
+  suspended          Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  votes  Vote[]
+  badges UserBadge[]
+
+  @@index([points])
+  @@index([email])
+}
+
+model Totem {
+  id          String  @id @default(uuid())
+  name        String
+  country     String
+  countryCode String  @unique
+  animal      String
+  imageUrl    String?
+  description String?
+
+  homeMatches Match[] @relation("HomeTotem")
+  awayMatches Match[] @relation("AwayTotem")
+
+  @@index([countryCode])
+}
+
+model Match {
+  id          String       @id @default(uuid())
+  slug        String       @unique
+  homeTotemId String
+  awayTotemId String
+  homeTotem   Totem        @relation("HomeTotem", fields: [homeTotemId], references: [id])
+  awayTotem   Totem        @relation("AwayTotem", fields: [awayTotemId], references: [id])
+  scheduledAt DateTime
+  status      MatchStatus  @default(UPCOMING)
+  homeScore   Int?
+  awayScore   Int?
+  result      MatchResult?
+  round       String?
+  group       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  votes Vote[]
+
+  @@index([status])
+  @@index([scheduledAt])
+  @@index([slug])
+}
+
+model Vote {
+  id           String      @id @default(uuid())
+  userId       String
+  matchId      String
+  prediction   MatchResult
+  isCorrect    Boolean?
+  pointsEarned Int         @default(0)
+  createdAt    DateTime    @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, matchId])
+  @@index([userId])
+  @@index([matchId])
+}
+
+model Badge {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+  icon        String
+  condition   String
+
+  users UserBadge[]
+}
+
+model UserBadge {
+  id       String   @id @default(uuid())
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badgeId], references: [id])
+
+  @@unique([userId, badgeId])
+}
+
+model AdBanner {
+  id        String    @id @default(uuid())
+  name      String
+  imageUrl  String
+  linkUrl   String?
+  placement String
+  active    Boolean   @default(true)
+  startsAt  DateTime?
+  endsAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+enum MatchStatus {
+  UPCOMING
+  LIVE
+  FINISHED
+  CANCELLED
+}
+
+enum MatchResult {
+  HOME
+  DRAW
+  AWAY
+}

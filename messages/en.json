@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Home",
+    "matches": "Matches",
+    "groups": "Groups",
+    "ranking": "Ranking",
+    "history": "History",
+    "profile": "Profile"
+  },
+  "groups": {
+    "title": "GROUPS",
+    "group": "Group",
+    "all": "All",
+    "team": "Team",
+    "matches": "matches",
+    "played_short": "P",
+    "gd_short": "GD",
+    "pts_short": "Pts",
+    "empty": "No groups configured"
+  },
+  "hero": {
+    "title": "CLASH OF TOTEMS",
+    "subtitle": "Predict the greatest duels of the World Cup.",
+    "vote": "Vote for your nation's totem animal.",
+    "stats_nations": "20 Nations",
+    "stats_realtime": "Real-time",
+    "stats_live": "Live ranking"
+  },
+  "match": {
+    "featured": "Match of the Day",
+    "vote_now": "VOTE NOW",
+    "upcoming": "UPCOMING DUELS",
+    "vs": "VS",
+    "upcoming_label": "Upcoming",
+    "live_label": "Live",
+    "finished_label": "Finished",
+    "cancelled_label": "Cancelled",
+    "countdown_days": "DAYS",
+    "countdown_hours": "HOURS",
+    "countdown_minutes": "MIN",
+    "countdown_seconds": "SEC",
+    "live_indicator": "LIVE",
+    "group_stage": "Group stage"
+  },
+  "vote": {
+    "title": "YOUR PREDICTION",
+    "victory": "Victory",
+    "draw": "Draw",
+    "community": "Community predictions",
+    "votes": "votes",
+    "voted": "Voted",
+    "official_result": "Official result",
+    "locked": "Prediction saved",
+    "connecting": "Connecting..."
+  },
+  "ranking": {
+    "title": "RANKING",
+    "top5": "TOP 5",
+    "see_all": "See all",
+    "points": "pts",
+    "you": "you",
+    "no_players": "No players in the ranking yet.",
+    "start_voting": "Start voting to appear here!"
+  },
+  "history": {
+    "title": "HISTORY",
+    "filter_all": "All",
+    "filter_won": "Won",
+    "filter_lost": "Lost",
+    "filter_pending": "Pending",
+    "total": "Total",
+    "won": "Won",
+    "points": "Points",
+    "my_prediction": "My prediction",
+    "draw": "Draw",
+    "no_votes": "No votes in this category"
+  },
+  "profile": {
+    "title": "PROFILE",
+    "logout": "Log out",
+    "rank": "Rank",
+    "points": "Points",
+    "win_rate": "Win rate",
+    "streak": "Current streak",
+    "predictions": "Predictions",
+    "my_badges": "MY BADGES",
+    "badges_to_unlock": "BADGES TO UNLOCK",
+    "not_connected": "Log in to see your profile."
+  },
+  "auth": {
+    "title": "CLASH OF TOTEMS",
+    "subtitle": "Enter the arena of predators",
+    "pseudo_label": "Your warrior nickname",
+    "pseudo_placeholder": "e.g. LionKing, PumaFire...",
+    "email_label": "Email (optional)",
+    "email_placeholder": "you@email.com",
+    "newsletter_optin": "Get today's clashes and results by email",
+    "enter_button": "ENTER THE ARENA",
+    "loading": "Connecting...",
+    "no_password": "No password required · Instant access"
+  },
+  "badges": {
+    "oracle": "Oracle",
+    "predator": "Predator",
+    "alpha": "Alpha",
+    "legend": "Legend",
+    "champion": "Totem Champion",
+    "invincible": "Invincible"
+  },
+  "admin": {
+    "title": "ADMIN",
+    "dashboard": "Dashboard",
+    "matches": "Matches",
+    "totems": "Totems",
+    "users": "Users",
+    "access": "ADMIN ACCESS",
+    "enter": "Enter",
+    "users_count": "Users",
+    "matches_count": "Matches",
+    "votes_count": "Votes",
+    "points_count": "Points distributed"
+  },
+  "common": {
+    "back": "Back",
+    "share": "Share",
+    "loading": "Loading...",
+    "no_matches": "No matches scheduled",
+    "error_404": "This totem doesn't exist in our arena",
+    "back_to_arena": "Back to the arena",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create"
+  }
+}

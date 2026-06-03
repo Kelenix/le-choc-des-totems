@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "matches": "Matchs",
+    "groups": "Groupes",
+    "ranking": "Classement",
+    "history": "Historique",
+    "profile": "Profil"
+  },
+  "groups": {
+    "title": "GROUPES",
+    "group": "Groupe",
+    "all": "Tous",
+    "team": "Équipe",
+    "matches": "matchs",
+    "played_short": "J",
+    "gd_short": "Diff",
+    "pts_short": "Pts",
+    "empty": "Aucun groupe configuré"
+  },
+  "hero": {
+    "title": "LE CHOC DES TOTEMS",
+    "subtitle": "Pronostique les plus grands duels de la Coupe du Monde.",
+    "vote": "Vote pour l'animal totem de ta nation.",
+    "stats_nations": "20 Nations",
+    "stats_realtime": "Temps réel",
+    "stats_live": "Classement live"
+  },
+  "match": {
+    "featured": "Match du Jour",
+    "vote_now": "VOTER MAINTENANT",
+    "upcoming": "PROCHAINS DUELS",
+    "vs": "VS",
+    "upcoming_label": "À venir",
+    "live_label": "En direct",
+    "finished_label": "Terminé",
+    "cancelled_label": "Annulé",
+    "countdown_days": "JOURS",
+    "countdown_hours": "HEURES",
+    "countdown_minutes": "MIN",
+    "countdown_seconds": "SEC",
+    "live_indicator": "EN COURS",
+    "group_stage": "Phase de groupes"
+  },
+  "vote": {
+    "title": "TON PRONOSTIC",
+    "victory": "Victoire",
+    "draw": "Match Nul",
+    "community": "Pronostics communauté",
+    "votes": "votes",
+    "voted": "Voté",
+    "official_result": "Résultat officiel",
+    "locked": "Pronostic enregistré",
+    "connecting": "Connexion..."
+  },
+  "ranking": {
+    "title": "CLASSEMENT",
+    "top5": "TOP 5",
+    "see_all": "Voir tout",
+    "points": "pts",
+    "you": "toi",
+    "no_players": "Aucun joueur dans le classement pour l'instant.",
+    "start_voting": "Commence à voter pour apparaître ici !"
+  },
+  "history": {
+    "title": "HISTORIQUE",
+    "filter_all": "Tous",
+    "filter_won": "Gagnés",
+    "filter_lost": "Perdus",
+    "filter_pending": "En attente",
+    "total": "Total",
+    "won": "Gagnés",
+    "points": "Points",
+    "my_prediction": "Mon pronostic",
+    "draw": "Match Nul",
+    "no_votes": "Aucun vote dans cette catégorie"
+  },
+  "profile": {
+    "title": "PROFIL",
+    "logout": "Déconnexion",
+    "rank": "Rang",
+    "points": "Points",
+    "win_rate": "Taux de réussite",
+    "streak": "Série en cours",
+    "predictions": "Pronostics",
+    "my_badges": "MES BADGES",
+    "badges_to_unlock": "BADGES À DÉBLOQUER",
+    "not_connected": "Connecte-toi pour voir ton profil."
+  },
+  "auth": {
+    "title": "LE CHOC DES TOTEMS",
+    "subtitle": "Entre dans l'arène des prédateurs",
+    "pseudo_label": "Ton pseudo de guerrier",
+    "pseudo_placeholder": "Ex: LionKing, PumaFire...",
+    "email_label": "Email (optionnel)",
+    "email_placeholder": "ton@email.com",
+    "newsletter_optin": "Reçois les résultats et duels du jour par email",
+    "enter_button": "ENTRER DANS L'ARÈNE",
+    "loading": "Connexion...",
+    "no_password": "Aucun mot de passe requis · Accès instantané"
+  },
+  "badges": {
+    "oracle": "Oracle",
+    "predator": "Prédateur",
+    "alpha": "Alpha",
+    "legend": "Légende",
+    "champion": "Champion Totem",
+    "invincible": "Invincible"
+  },
+  "admin": {
+    "title": "ADMIN",
+    "dashboard": "Tableau de bord",
+    "matches": "Matchs",
+    "totems": "Totems",
+    "users": "Utilisateurs",
+    "access": "ADMIN ACCESS",
+    "enter": "Entrer",
+    "users_count": "Utilisateurs",
+    "matches_count": "Matchs",
+    "votes_count": "Votes",
+    "points_count": "Points distribués"
+  },
+  "common": {
+    "back": "Retour",
+    "share": "Partager",
+    "loading": "Chargement...",
+    "no_matches": "Aucun match programmé",
+    "error_404": "Ce totem n'existe pas dans notre arène",
+    "back_to_arena": "Retour à l'arène",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer"
+  }
+}
