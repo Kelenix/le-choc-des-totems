@@ -14,10 +14,21 @@ interface TeamStanding {
   played: number; won: number; drawn: number; lost: number;
   goalsFor: number; goalsAgainst: number; goalDiff: number; points: number;
 }
+interface GroupMatch {
+  id: string;
+  slug: string;
+  status: string;
+  scheduledAt: string;
+  homeScore: number | null;
+  awayScore: number | null;
+  homeTotem: { country: string; countryCode: string };
+  awayTotem: { country: string; countryCode: string };
+}
+
 interface Group {
   letter: string;
   teams: TeamStanding[];
-  matches: any[];
+  matches: GroupMatch[];
 }
 
 export default function GroupesPage() {
@@ -25,7 +36,6 @@ export default function GroupesPage() {
   const [loading, setLoading] = useState(true);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const t = useTranslations("groups");
-  const tm = useTranslations("match");
   const locale = useLocale();
   const prefix = locale === "fr" ? "" : `/${locale}`;
 

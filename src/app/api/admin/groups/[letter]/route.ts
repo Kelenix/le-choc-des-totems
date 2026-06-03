@@ -168,13 +168,11 @@ export async function PATCH(
       created,
       teams: codes,
     });
-  } catch (e: any) {
+  } catch (e) {
     if (e instanceof z.ZodError) {
       return NextResponse.json({ error: e.issues }, { status: 400 });
     }
-    return NextResponse.json(
-      { error: e?.message ?? "Internal error" },
-      { status: 500 }
-    );
+    const message = e instanceof Error ? e.message : "Internal error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

@@ -6,7 +6,7 @@ import { AuthProvider } from "./AuthProvider";
 import { Navbar } from "@/components/layout/Navbar";
 
 interface Props {
-  messages: Record<string, any>;
+  messages: Record<string, unknown>;
   locale: string;
   children: React.ReactNode;
 }

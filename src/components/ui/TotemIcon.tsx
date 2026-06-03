@@ -1,11 +1,11 @@
 import { type IconType } from "react-icons";
 import {
   GiRooster, GiLion, GiTigerHead, GiEagleHead, GiBull,
-  GiWolfHead, GiBearHead, GiFoxHead, GiPaw, GiSnakeTotem,
-  GiTotemMask, GiDragonfly, GiRhinocerosHorn, GiFireShield,
+  GiWolfHead, GiBearHead, GiFoxHead, GiPaw,
+  GiTotemMask, GiRhinocerosHorn, GiFireShield,
   GiSeaSerpent, GiElephant, GiKangaroo, GiSheep, GiCondorEmblem,
-  GiHorseHead, GiMonkey, GiCrowNest, GiCrabClaw,
-  GiAnt, GiBigDiamondRing, GiSpiderFace,
+  GiHorseHead, GiMonkey, GiCrowNest,
+  GiAnt, GiBigDiamondRing,
 } from "react-icons/gi";
 import { cn } from "@/lib/utils";
 

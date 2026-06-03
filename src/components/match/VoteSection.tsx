@@ -75,8 +75,8 @@ export function VoteSection({ match, userVote, voteStats, onVote }: Props) {
       setLocalVote(prediction);
       setStats(next);
       onVote?.(prediction);
-    } catch (e: any) {
-      setError(e.message ?? "Erreur inconnue");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Erreur inconnue");
     } finally {
       setPending(null);
     }

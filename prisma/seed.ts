@@ -4,7 +4,7 @@ import "dotenv/config";
 import { slugify } from "../src/lib/utils";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
-const prisma = new PrismaClient({ adapter } as any);
+const prisma = new PrismaClient({ adapter } as ConstructorParameters<typeof PrismaClient>[0]);
 
 // ════════════════════════════════════════════════════════════════════
 //  COUPE DU MONDE FIFA 2026 — USA / CANADA / MEXIQUE

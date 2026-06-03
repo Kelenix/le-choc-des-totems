@@ -15,10 +15,15 @@ interface TeamEntry {
   points: number;
 }
 
+interface GroupMatch {
+  id: string;
+  slug: string;
+}
+
 interface Group {
   letter: string;
   teams: TeamEntry[];
-  matches: any[];
+  matches: GroupMatch[];
 }
 
 interface Totem {
@@ -123,8 +128,8 @@ export default function AdminGroupes() {
       } else {
         setMsg(`❌ ${data.error ?? "Erreur"}`);
       }
-    } catch (e: any) {
-      setMsg(`❌ ${e.message}`);
+    } catch (e) {
+      setMsg(`❌ ${e instanceof Error ? e.message : "Erreur inconnue"}`);
     } finally {
       setSaving(false);
     }
@@ -151,8 +156,8 @@ export default function AdminGroupes() {
       } else {
         setMsg(`❌ ${data.error}`);
       }
-    } catch (e: any) {
-      setMsg(`❌ ${e.message}`);
+    } catch (e) {
+      setMsg(`❌ ${e instanceof Error ? e.message : "Erreur inconnue"}`);
     } finally {
       setReseeding(false);
     }
@@ -184,8 +189,8 @@ export default function AdminGroupes() {
       <div className="glass rounded-xl p-4 mb-6 border border-[#3B82F6]/20 flex items-start gap-3">
         <AlertTriangle size={18} className="text-[#3B82F6] shrink-0 mt-0.5" />
         <p className="text-sm text-[#94A3B8]">
-          Clique sur l'icône <Pencil size={12} className="inline mx-1 text-[#FBBF24]" />
-          d'un groupe pour modifier sa composition. Les 6 matchs du groupe seront
+          Clique sur l&apos;icône <Pencil size={12} className="inline mx-1 text-[#FBBF24]" />
+          d&apos;un groupe pour modifier sa composition. Les 6 matchs du groupe seront
           régénérés selon le calendrier officiel FIFA. Les résultats (gérés
           dans <strong>Matchs</strong>) mettent à jour automatiquement le
           classement.

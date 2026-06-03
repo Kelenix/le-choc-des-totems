@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
+
+type MatchWithTotems = Prisma.MatchGetPayload<{
+  include: { homeTotem: true; awayTotem: true };
+}>;
 
 // Calcule le classement de chaque groupe à partir des matchs terminés
 export async function GET() {
@@ -14,11 +19,11 @@ export async function GET() {
     const groupsMap = new Map<string, {
       letter: string;
       teams: Map<string, {
-        totem: any;
+        totem: MatchWithTotems["homeTotem"];
         played: number; won: number; drawn: number; lost: number;
         goalsFor: number; goalsAgainst: number; goalDiff: number; points: number;
       }>;
-      matches: any[];
+      matches: MatchWithTotems[];
     }>();
 
     for (const m of matches) {

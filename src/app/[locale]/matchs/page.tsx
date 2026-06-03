@@ -6,14 +6,12 @@ import { useTranslations } from "next-intl";
 import { GiCrossedSwords } from "react-icons/gi";
 import { MatchCard } from "@/components/match/MatchCard";
 import type { MatchWithVote } from "@/types";
-import { useUserStore } from "@/store/userStore";
 import { cn } from "@/lib/utils";
 
 export default function MatchsPage() {
   const [matches, setMatches] = useState<MatchWithVote[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
-  const { id: userId } = useUserStore();
   const t = useTranslations("match");
   const tc = useTranslations("common");
 

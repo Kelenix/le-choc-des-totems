@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
-import { GiSwordClash, GiTotemHead, GiLion } from "react-icons/gi";
+import { GiSwordClash, GiTotemHead } from "react-icons/gi";
 import { saveLocalUser } from "@/lib/auth";
 import { useUserStore } from "@/store/userStore";
 

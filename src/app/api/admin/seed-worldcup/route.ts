@@ -76,7 +76,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true, matchCount });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Internal error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

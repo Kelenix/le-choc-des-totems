@@ -9,7 +9,14 @@ import { useUserStore } from "@/store/userStore";
 import { clearLocalUser } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import type { UserWithRank } from "@/types";
-import { cn } from "@/lib/utils";
+
+type BadgeKey =
+  | "oracle"
+  | "predator"
+  | "alpha"
+  | "legend"
+  | "champion"
+  | "invincible";
 
 const BADGE_ICONS: Record<string, React.ElementType> = {
   "Oracle": GiCrystalBall,
@@ -158,7 +165,7 @@ export default function ProfilPage() {
                 {LOCKED_BADGES.map(({ key, Icon }) => (
                   <div key={key} className="glass rounded-xl p-3 text-center border border-white/5 opacity-30">
                     <Icon size={32} className="text-[#94A3B8] mx-auto mb-1" />
-                    <div className="text-xs text-[#475569]">{tb(key.toLowerCase() as any)}</div>
+                    <div className="text-xs text-[#475569]">{tb(key.toLowerCase() as BadgeKey)}</div>
                   </div>
                 ))}
               </div>

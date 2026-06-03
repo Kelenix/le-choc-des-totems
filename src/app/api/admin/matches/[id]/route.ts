@@ -6,13 +6,6 @@ function checkAdmin(req: NextRequest) {
   return req.headers.get("x-admin-secret") === process.env.ADMIN_SECRET;
 }
 
-const resultSchema = z.object({
-  homeScore: z.number().int().min(0),
-  awayScore: z.number().int().min(0),
-  result: z.enum(["HOME", "DRAW", "AWAY"]),
-  status: z.literal("FINISHED"),
-});
-
 const updateSchema = z.object({
   status: z.enum(["UPCOMING", "LIVE", "FINISHED", "CANCELLED"]).optional(),
   homeScore: z.number().int().min(0).optional(),

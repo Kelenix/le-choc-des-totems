@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { calculateVoteStats } from "@/lib/utils";
 import { MatchDetailClient } from "@/components/match/MatchDetailClient";
 import type { Metadata } from "next";
+import type { Match } from "@/types";
 
 export const dynamic = "force-dynamic";
 
@@ -48,5 +49,5 @@ export default async function MatchPage({ params }: Props) {
 
   const { votes, ...matchData } = match;
   const voteStats = calculateVoteStats(votes);
-  return <MatchDetailClient match={matchData as any} voteStats={voteStats} />;
+  return <MatchDetailClient match={matchData as unknown as Match} voteStats={voteStats} />;
 }

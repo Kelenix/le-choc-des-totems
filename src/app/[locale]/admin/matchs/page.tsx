@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, Check, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Edit2, Trash2, Check, X } from "lucide-react";
 import { formatDate } from "@/lib/utils";
-
-const SECRET = typeof window !== "undefined" ? localStorage.getItem("admin_secret") || "" : "";
 
 interface Match {
   id: string;
@@ -30,7 +28,12 @@ export default function AdminMatchs() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<string | null>(null);
-  const [editData, setEditData] = useState<any>({});
+  const [editData, setEditData] = useState<{
+    status?: string;
+    homeScore?: number | string;
+    awayScore?: number | string;
+    result?: string;
+  }>({});
   const adminSecret = typeof window !== "undefined"
     ? (localStorage.getItem("admin_secret") || "changez-ce-secret-en-production")
     : "";
@@ -56,7 +59,7 @@ export default function AdminMatchs() {
   };
 
   const saveEdit = async (id: string) => {
-    const body: any = { status: editData.status };
+    const body: Record<string, unknown> = { status: editData.status };
     if (editData.status === "FINISHED") {
       body.homeScore = Number(editData.homeScore);
       body.awayScore = Number(editData.awayScore);

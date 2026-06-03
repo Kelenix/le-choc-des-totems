@@ -38,7 +38,7 @@ export function Flag({ code, size = "md", className, rounded = true }: Props) {
   }
 
   // GB shows England flag — use traditional GB flag instead
-  const FlagComponent = (Flags as any)[upper];
+  const FlagComponent = (Flags as Record<string, React.ComponentType<{ title?: string; className?: string }>>)[upper];
 
   return (
     <FlagComponent

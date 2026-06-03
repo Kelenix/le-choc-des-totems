@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     voteRateLimit.set(key, now);
 
     return NextResponse.json(vote, { status: 201 });
-  } catch (e) {
+  } catch {
     // Supprime la clé pour permettre un retry
     voteRateLimit.delete(key);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });

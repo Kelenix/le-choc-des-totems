@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { MatchCard } from "@/components/match/MatchCard";
 import type { MatchWithVote } from "@/types";
 import { useUserStore } from "@/store/userStore";

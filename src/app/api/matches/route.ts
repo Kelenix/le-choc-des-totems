@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import type { MatchStatus } from "@prisma/client";
+
+const VALID_STATUSES = ["UPCOMING", "LIVE", "FINISHED", "CANCELLED"] as const;
+
+function isValidStatus(s: string | null): s is MatchStatus {
+  return s !== null && (VALID_STATUSES as readonly string[]).includes(s);
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -8,7 +15,7 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "20");
 
     const matches = await prisma.match.findMany({
-      where: status ? { status: status as any } : undefined,
+      where: isValidStatus(status) ? { status } : undefined,
       include: { homeTotem: true, awayTotem: true },
       orderBy: { scheduledAt: "asc" },
       take: limit,
