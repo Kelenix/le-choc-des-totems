@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "Le Choc des Totems",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   manifest: "/manifest.json",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Choc Totems" },
