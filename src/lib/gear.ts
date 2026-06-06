@@ -18,7 +18,7 @@ const AMAZON_MARKETPLACES: Record<
   LU: { host: "amazon.fr",      tag: "YOUR_AMAZON_FR_TAG-21", lang: "fr" },
   DE: { host: "amazon.de",      tag: "YOUR_AMAZON_DE_TAG-21", lang: "de" },
   AT: { host: "amazon.de",      tag: "YOUR_AMAZON_DE_TAG-21", lang: "de" },
-  IT: { host: "amazon.it",      tag: "YOUR_AMAZON_IT_TAG-21", lang: "it" },
+  IT: { host: "amazon.it",      tag: "nkwatech-21", lang: "it" },
   ES: { host: "amazon.es",      tag: "YOUR_AMAZON_ES_TAG-21", lang: "es" },
   GB: { host: "amazon.co.uk",   tag: "YOUR_AMAZON_UK_TAG-21", lang: "en" },
   EN: { host: "amazon.co.uk",   tag: "YOUR_AMAZON_UK_TAG-21", lang: "en" },
