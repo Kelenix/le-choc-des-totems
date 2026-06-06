@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Edit2, Trash2, Check, X } from "lucide-react";
+import { Edit2, Trash2, Check, X, Search } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
 interface Match {
@@ -14,11 +14,13 @@ interface Match {
   awayScore: number | null;
   result: string | null;
   round: string | null;
+  group: string | null;
   homeTotem: { country: string; countryCode: string };
   awayTotem: { country: string; countryCode: string };
 }
 
 const STATUS_OPTIONS = ["UPCOMING", "LIVE", "FINISHED", "CANCELLED"];
+const GROUP_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
 const FLAG_EMOJIS: Record<string, string> = {
   FR: "🇫🇷", SN: "🇸🇳", MA: "🇲🇦", AR: "🇦🇷", BR: "🇧🇷",
   ES: "🇪🇸", DE: "🇩🇪", IT: "🇮🇹", GB: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", NL: "🇳🇱",
@@ -28,15 +30,29 @@ export default function AdminMatchs() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [groupFilter, setGroupFilter] = useState("ALL");
   const [editData, setEditData] = useState<{
     status?: string;
     homeScore?: number | string;
     awayScore?: number | string;
     result?: string;
   }>({});
-  const adminSecret = typeof window !== "undefined"
-    ? (localStorage.getItem("admin_secret") || "changez-ce-secret-en-production")
-    : "";
+  const adminSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
+
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
+    return matches.filter((m) => {
+      const matchesSearch = !q ||
+        m.homeTotem.country.toLowerCase().includes(q) ||
+        m.awayTotem.country.toLowerCase().includes(q) ||
+        (m.round?.toLowerCase().includes(q) ?? false);
+      const matchesStatus = statusFilter === "ALL" || m.status === statusFilter;
+      const matchesGroup = groupFilter === "ALL" || m.group === groupFilter;
+      return matchesSearch && matchesStatus && matchesGroup;
+    });
+  }, [matches, search, statusFilter, groupFilter]);
 
   const headers = { "Content-Type": "application/json", "x-admin-secret": adminSecret };
 
@@ -87,13 +103,60 @@ export default function AdminMatchs() {
     <div>
       <h1 className="font-title text-3xl gradient-gold tracking-widest mb-6">GESTION DES MATCHS</h1>
 
+      {/* Filtres */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#475569]" />
+          <input
+            type="text"
+            placeholder="Rechercher un pays..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full bg-[#070B14] border border-[#1E293B] rounded-lg pl-8 pr-3 py-2 text-white text-sm outline-none focus:border-[#FBBF24] transition-colors"
+          />
+        </div>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="bg-[#070B14] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-[#FBBF24] transition-colors"
+        >
+          <option value="ALL">Tous les statuts</option>
+          {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
+        </select>
+        <select
+          value={groupFilter}
+          onChange={(e) => setGroupFilter(e.target.value)}
+          className="bg-[#070B14] border border-[#1E293B] rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-[#FBBF24] transition-colors"
+        >
+          <option value="ALL">Tous les groupes</option>
+          {GROUP_LETTERS.map((g) => <option key={g} value={g}>Groupe {g}</option>)}
+        </select>
+        {(search || statusFilter !== "ALL" || groupFilter !== "ALL") && (
+          <button
+            onClick={() => { setSearch(""); setStatusFilter("ALL"); setGroupFilter("ALL"); }}
+            className="px-3 py-2 text-xs text-[#94A3B8] glass rounded-lg hover:text-white transition-colors"
+          >
+            Réinitialiser
+          </button>
+        )}
+      </div>
+
+      {/* Compteur */}
+      {!loading && (
+        <p className="text-xs text-[#475569] mb-3">
+          {filtered.length} match{filtered.length !== 1 ? "s" : ""} affiché{filtered.length !== 1 ? "s" : ""} sur {matches.length}
+        </p>
+      )}
+
       {loading ? (
         <div className="space-y-3">
           {[1, 2, 3].map((i) => <div key={i} className="glass rounded-xl h-16 animate-pulse border border-white/5" />)}
         </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-12 text-[#475569]">Aucun match trouvé</div>
       ) : (
         <div className="space-y-3">
-          {matches.map((match) => (
+          {filtered.map((match) => (
             <motion.div
               key={match.id}
               className="glass rounded-xl p-4 border border-white/5"

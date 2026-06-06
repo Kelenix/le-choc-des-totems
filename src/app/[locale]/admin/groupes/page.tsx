@@ -50,10 +50,7 @@ export default function AdminGroupes() {
   ]);
   const [saving, setSaving] = useState(false);
 
-  const adminSecret =
-    typeof window !== "undefined"
-      ? localStorage.getItem("admin_secret") || "kelenix"
-      : "";
+  const adminSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
 
   const loadAll = () => {
     setLoading(true);

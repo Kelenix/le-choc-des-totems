@@ -29,9 +29,7 @@ interface Totem {
 export default function AdminTotems() {
   const [totems, setTotems] = useState<Totem[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const adminSecret = typeof window !== "undefined"
-    ? (localStorage.getItem("admin_secret") || "changez-ce-secret-en-production")
-    : "";
+  const adminSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),

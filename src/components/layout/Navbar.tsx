@@ -1,18 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Home, Swords, Trophy, History, User, Grid3x3 } from "lucide-react";
+import { Home, Swords, Trophy, History, User, Grid3x3, ShoppingBag } from "lucide-react";
 import { GiSwordClash } from "react-icons/gi";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { GearShopModal } from "@/components/monetization/GearShopModal";
 import { cn } from "@/lib/utils";
+
+const GENERIC_HOME = { country: "France", countryCode: "FR" };
+const GENERIC_AWAY = { country: "Brésil", countryCode: "BR" };
 
 export function Navbar() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const locale = useLocale();
+  const [shopOpen, setShopOpen] = useState(false);
 
   const prefix = locale === "fr" ? "" : `/${locale}`;
 
@@ -59,6 +65,17 @@ export function Navbar() {
                 </motion.div>
               </Link>
             ))}
+
+            <motion.button
+              type="button"
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setShopOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-[#FBBF24]/10 text-[#FBBF24] hover:bg-[#FBBF24]/20 transition-all duration-200 border border-[#FBBF24]/20 ml-1"
+            >
+              <ShoppingBag size={15} />
+              Boutique
+            </motion.button>
+
             <div className="ml-3">
               <LanguageSwitcher />
             </div>
@@ -99,6 +116,24 @@ export function Navbar() {
       <div className="md:hidden fixed top-3 right-3 z-50">
         <LanguageSwitcher />
       </div>
+
+      {/* Mobile boutique button — floating */}
+      <motion.button
+        type="button"
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setShopOpen(true)}
+        className="md:hidden fixed top-3 left-3 z-50 flex items-center gap-1.5 px-3 py-2 rounded-xl glass border border-[#FBBF24]/25 text-[#FBBF24] text-xs font-medium"
+      >
+        <ShoppingBag size={14} />
+        Boutique
+      </motion.button>
+
+      <GearShopModal
+        open={shopOpen}
+        onClose={() => setShopOpen(false)}
+        home={GENERIC_HOME}
+        away={GENERIC_AWAY}
+      />
     </>
   );
 }

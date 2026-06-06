@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
-import { Swords, Users, Shield, BarChart3, Grid3x3 } from "lucide-react";
+import { Swords, Users, Shield, BarChart3, Grid3x3, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+const STORAGE_KEY = "admin_authed";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [secret, setSecret] = useState("");
   const [authed, setAuthed] = useState(false);
+  const [error, setError] = useState(false);
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("admin");
   const prefix = locale === "fr" ? "" : `/${locale}`;
+
+  useEffect(() => {
+    if (localStorage.getItem(STORAGE_KEY) === "1") {
+      setAuthed(true);
+    }
+  }, []);
 
   const NAV = [
     { href: `${prefix}/admin`,               icon: BarChart3, label: t("dashboard") },
@@ -23,6 +32,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: `${prefix}/admin/utilisateurs`,   icon: Users,     label: t("users") },
   ];
 
+  const handleLogin = () => {
+    const expected = process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
+    if (secret === expected) {
+      localStorage.setItem(STORAGE_KEY, "1");
+      setAuthed(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setAuthed(false);
+    setSecret("");
+  };
+
   if (!authed) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
@@ -31,14 +57,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <input
             type="password"
             value={secret}
-            onChange={(e) => setSecret(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && setAuthed(true)}
+            onChange={(e) => { setSecret(e.target.value); setError(false); }}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             placeholder="Secret"
-            className="w-full bg-[#070B14] border border-[#1E293B] rounded-xl px-4 py-3 text-white outline-none mb-4 focus:border-[#FBBF24]"
+            className={cn(
+              "w-full bg-[#070B14] border rounded-xl px-4 py-3 text-white outline-none mb-2 transition-colors",
+              error ? "border-[#EF4444] focus:border-[#EF4444]" : "border-[#1E293B] focus:border-[#FBBF24]"
+            )}
           />
+          {error && (
+            <p className="text-[#EF4444] text-xs mb-3">Code incorrect</p>
+          )}
           <button
-            onClick={() => setAuthed(true)}
-            className="w-full bg-[#FBBF24] text-black font-bold py-3 rounded-xl"
+            onClick={handleLogin}
+            className="w-full bg-[#FBBF24] text-black font-bold py-3 rounded-xl mt-2"
           >
             {t("enter")}
           </button>
@@ -65,6 +97,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Link>
           );
         })}
+        <div className="mt-auto">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[#94A3B8] hover:text-[#EF4444] hover:bg-[#EF4444]/5 transition-all w-full"
+          >
+            <LogOut size={15} />
+            Déconnexion
+          </button>
+        </div>
       </aside>
       <main className="flex-1 p-6 overflow-auto">{children}</main>
     </div>

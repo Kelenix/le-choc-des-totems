@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MatchCard } from "@/components/match/MatchCard";
-import type { MatchWithVote } from "@/types";
+import type { MatchWithVote, MatchResult } from "@/types";
 import { useUserStore } from "@/store/userStore";
 
 export function UpcomingMatches() {
@@ -16,20 +16,16 @@ export function UpcomingMatches() {
       .then(async (data: MatchWithVote[]) => {
         if (!Array.isArray(data)) return;
 
-        // Fetch user votes if logged in
         if (userId) {
-          const enriched = await Promise.all(
-            data.map(async (match) => {
-              try {
-                const vr = await fetch(`/api/votes?userId=${userId}&matchId=${match.id}`);
-                const vote = await vr.json();
-                return { ...match, userVote: vote };
-              } catch {
-                return match;
-              }
-            })
-          );
-          setMatches(enriched);
+          const ids = data.map((m) => m.id).join(",");
+          const voteMap: Record<string, string> = await fetch(
+            `/api/votes/batch?userId=${userId}&matchIds=${ids}`
+          ).then((r) => r.json()).catch(() => ({}));
+
+          setMatches(data.map((m) => ({
+            ...m,
+            userVote: (voteMap[m.id] as MatchResult) ?? null,
+          })));
         } else {
           setMatches(data);
         }

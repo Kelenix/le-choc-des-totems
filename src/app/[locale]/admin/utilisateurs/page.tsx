@@ -18,9 +18,7 @@ interface User {
 export default function AdminUtilisateurs() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const adminSecret = typeof window !== "undefined"
-    ? (localStorage.getItem("admin_secret") || "changez-ce-secret-en-production")
-    : "";
+  const adminSecret = process.env.NEXT_PUBLIC_ADMIN_SECRET || "";
 
   useEffect(() => {
     fetch("/api/admin/users", { headers: { "x-admin-secret": adminSecret } })

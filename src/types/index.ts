@@ -77,7 +77,7 @@ export interface UserBadgeWithDetails {
 }
 
 export interface MatchWithVote extends Match {
-  userVote?: Vote | null;
+  userVote?: MatchResult | null;
   voteStats?: VoteStats;
 }
 
