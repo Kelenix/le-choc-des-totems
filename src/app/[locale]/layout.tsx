@@ -55,7 +55,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <head>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3959323552298640"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9846987446275548"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
