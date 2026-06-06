@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import { Providers } from "@/components/providers/Providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://le-choc-des-totems.vercel.app"),
+  metadataBase: new URL("https://lechocdestotems.store"),
   title: {
     default: "Le Choc des Totems | Pronostics Coupe du Monde",
     template: "%s | Le Choc des Totems",
@@ -51,6 +52,14 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} className="h-full" data-scroll-behavior="smooth">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3959323552298640"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="min-h-full bg-[#070B14] text-white antialiased overflow-x-hidden">
         <Providers messages={messages} locale={locale}>
           {children}
