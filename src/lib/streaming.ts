@@ -74,7 +74,7 @@ export const STREAMING_PROVIDERS: StreamingProvider[] = [
   {
     id: "fifaplus",
     name: "FIFA+",
-    signupUrl: "https://www.fifa.com/fifaplus/?utm_source=YOUR_FIFA_REF",
+    signupUrl: "https://www.fifa.com/fifaplus/",
     countries: [],
     locales: ["en", "fr", "es"],
     brand: "#326295",
