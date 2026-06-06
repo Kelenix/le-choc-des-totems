@@ -13,9 +13,9 @@ const AMAZON_MARKETPLACES: Record<
   string,
   { host: string; tag: string; lang: string }
 > = {
-  FR: { host: "amazon.fr",      tag: "YOUR_AMAZON_FR_TAG-21", lang: "fr" },
-  BE: { host: "amazon.fr",      tag: "YOUR_AMAZON_FR_TAG-21", lang: "fr" },
-  LU: { host: "amazon.fr",      tag: "YOUR_AMAZON_FR_TAG-21", lang: "fr" },
+  FR: { host: "amazon.fr",      tag: "nkwatech0e-21", lang: "fr" },
+  BE: { host: "amazon.fr",      tag: "nkwatech0e-21", lang: "fr" },
+  LU: { host: "amazon.fr",      tag: "nkwatech0e-21", lang: "fr" },
   DE: { host: "amazon.de",      tag: "nkwatech0d-21", lang: "de" },
   AT: { host: "amazon.de",      tag: "nkwatech0d-21", lang: "de" },
   IT: { host: "amazon.it",      tag: "nkwatech-21",   lang: "it" },
