@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
   description: "Pronostique les matchs de la Coupe du Monde en votant pour l'animal totem de chaque nation.",
   keywords: ["coupe du monde", "pronostics", "football", "totems"],
+  other: { "google-adsense-account": "ca-pub-9846987446275548" },
   openGraph: {
     type: "website",
     locale: "fr_FR",
